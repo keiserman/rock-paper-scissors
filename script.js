@@ -1,18 +1,17 @@
 let playerScore = 0;
 let computerScore = 0;
 let playerSelection;
+let roundCount = 10;
 
 const message = document.getElementById("message");
 const playerScoreContainer = document.getElementById("playerScore");
 const computerScoreContainer = document.getElementById("computerScore");
+const choices = document.querySelectorAll(".selection");
 
-const rock = document.getElementById("rock");
-const paper = document.getElementById("paper");
-const scissors = document.getElementById("scissors");
-
-rock.addEventListener("click", () => { playRound("rock") });
-paper.addEventListener("click", () => { playRound("paper") });
-scissors.addEventListener("click", () => { playRound("scissors") });
+choices.forEach(choice => choice.addEventListener("click", () => {
+    playerSelection = choice.id;
+    playRound(playerSelection);
+}));
 
 function getComputerChoice() {
     let num = Math.random();
@@ -26,35 +25,35 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection) {
-    if (playerScore === 5 || computerScore === 5) {
+    if (playerScore === roundCount || computerScore === roundCount) {
         return;
     }
     let computerSelection = getComputerChoice();
     if (playerSelection === computerSelection) {
-        message.innerHTML = "You tie!";
+        message.textContent = "You tie!";
     } else if (playerSelection === "rock" && computerSelection === "paper") {
         ++computerScore;
-        computerScoreContainer.innerHTML = computerScore;
-        message.innerHTML = "You lose! Paper beats Rock!";
+        computerScoreContainer.textContent = computerScore;
+        message.textContent = "You lose! Paper beats Rock!";
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
         ++playerScore;
-        playerScoreContainer.innerHTML = playerScore;
-        message.innerHTML = "You win! Rock beats Scissors";
+        playerScoreContainer.textContent = playerScore;
+        message.textContent = "You win! Rock beats Scissors";
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
         ++computerScore;
-        computerScoreContainer.innerHTML = computerScore;
-        message.innerHTML = "You lose! Scissors beats Paper";
+        computerScoreContainer.textContent = computerScore;
+        message.textContent = "You lose! Scissors beats Paper";
     } else if (playerSelection === "paper" && computerSelection === "rock") {
         ++playerScore;
-        playerScoreContainer.innerHTML = playerScore;
-        message.innerHTML = "You win! Paper beats Rock";
+        playerScoreContainer.textContent = playerScore;
+        message.textContent = "You win! Paper beats Rock";
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
         ++computerScore;
-        computerScoreContainer.innerHTML = computerScore;
-        message.innerHTML = "You lose! Rock beats Scissors";
+        computerScoreContainer.textContent = computerScore;
+        message.textContent = "You lose! Rock beats Scissors";
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
         ++playerScore;
-        playerScoreContainer.innerHTML = playerScore;
-        message.innerHTML = "You win! Scissors beats Paper";
+        playerScoreContainer.textContent = playerScore;
+        message.textContent = "You win! Scissors beats Paper";
     }
 }
